@@ -16,47 +16,56 @@
       /*
                   EX1) Write a selector to target the main title of the page*/
       h1 {
+        color: red;
       }
       /* EX2) Write a selector to target every children of the navbar */
 
       .nav > a {
+        color: green;
       }
 
       /* EX3) Write a selector to target the "continue reading..." inside the jumbotron */
 
       .jumbotron a[href]:last-of-type {
+        background-color: yellow;
       }
       /* EX4) Write a selector to target the first blogpost */
 
       .blog-main .blog-post:first-of-type {
+        background-color: black;
+        color: white;
       }
 
       /* EX5) Write a selector to target the "even" links in the navbar */
 
-      nav:nth-child(even) {
+      nav a.p-2:nth-child(even) {
+        background-color: pink;
       }
 
       /* EX6) Write a selector to target the last blog post */
 
       .blog-main .blog-post:last-of-type {
+        color: red;
       }
 
       /* EX7) Write a selector to target all the li into the first ordered-list in the sidebar ( Archives ) */
 
-      .sidebar .list-unstyled > li {
+      aside div:nth-child(2) ol li a {
+        background-color: green;
       }
       /* EX8) Write a selector to target the second post author */
 
-      .blog-main:nth-child(2n) a[href]:first-of-type {
+      .blog-post:nth-last-of-type(2) .blog-post-meta a {
+        color: hotpink;
       }
+
       /* EX9) Write a selector to target the "back to top" link      */
 
-      .blog-footer p a[href]:first-of-type {
+      footer p:last-child a {
+        background-color: yellow;
       }
       /* #### EXTRA Try doing it without targeting the footer element directly
                   EX10) Write a selector to target the footer */
-      body div:last-child {
-      }
     </style>
     <meta charset="utf-8" />
     <meta
