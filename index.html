@@ -31,7 +31,7 @@
       }
       /* EX4) Write a selector to target the first blogpost */
 
-      .blog-main .blog-post:first-of-type {
+      .blog-post:first-of-type {
         background-color: black;
         color: white;
       }
@@ -44,18 +44,21 @@
 
       /* EX6) Write a selector to target the last blog post */
 
-      .blog-main .blog-post:last-of-type {
+      .blog-post:last-of-type {
         color: red;
       }
 
       /* EX7) Write a selector to target all the li into the first ordered-list in the sidebar ( Archives ) */
 
-      aside div:nth-child(2) ol li a {
+      aside div:nth-child(2) ol li {
         background-color: green;
+      }
+
+      div.p-4 > ol > li {
       }
       /* EX8) Write a selector to target the second post author */
 
-      .blog-post:nth-last-of-type(2) .blog-post-meta a {
+      .blog-post-meta:nth-child(2) a {
         color: hotpink;
       }
 
@@ -65,7 +68,11 @@
         background-color: yellow;
       }
       /* #### EXTRA Try doing it without targeting the footer element directly
-                  EX10) Write a selector to target the footer */
+       EX10) Write a selector to target the footer */
+
+      footer {
+        color: purple;
+      }
     </style>
     <meta charset="utf-8" />
     <meta
@@ -494,7 +501,8 @@
 
       function generateNavLink() {
         let navLinks = document.getElementsByClassName("nav")[0];
-        let newLinks = document.createElement("div");
+        let newLinks = document.createElement("a");
+        newLinks.classList.add("p-2", "text-muted");
         newLinks.innerText = "New Nav Link";
         navLinks.appendChild(newLinks);
       }
@@ -516,7 +524,7 @@
       // EX14) Write a function to change the color of the main title
 
       function changeMainTitleColor() {
-        let mainTitle = document.querySelector(".blog-header-logo");
+        let mainTitle = document.querySelector("h1");
         mainTitle.classList.remove("text-dark");
         mainTitle.classList.add("mainTitle");
       }
@@ -528,26 +536,69 @@
       // }
 
       function columnSize() {
-        let postHeadingSize = document.querySelectorAll("h2");
-        postHeadingSize.classList.replace("col-md-6", "col-md-4");
+        let allH2s = document.querySelectorAll(".blog-post h2");
+        for (let i = 0; i < allH2s.length; i++) {
+          allH2s[i].classList.add("col-4");
+        }
       }
       // EX16) Write a function to remove all the links under "Elsewhere"
 
       function removeElsewhereLinks() {
-        let elseLinks = document.querySelectorAll(".p-4:last-of-type ol li");
-        for (let i = 0; i <= elseLinks; i++) {
-          elseLinks.remove(i);
-        }
+        let elseLinks = document.querySelectorAll(".list-unstyled")[1];
+        elseLinks.remove();
       }
 
       // EX17) Write a function to trim just the first 50 characters in the first paragraph for each blog post
-
+      function trimParagraph() {
+        let firstTextParagraph = document.querySelectorAll(
+          ".blog-post p:nth-of-type(2)"
+        );
+        for (let i = 0; i < firstTextParagraph.length; i++) {
+          firstTextParagraph[0].innerText = firstTextParagraph[0].innerText.slice(
+            0,
+            50
+          );
+        }
+      }
       // EX18) Write a function and attach it to the "Newer" button, to add new Blog Post (just div and title)
+
+      function addNewPost() {
+        let newerButton = document.querySelector(
+          ".blog-pagination a:nth-of-type(2)"
+        );
+        newerButton.classList.remove("disabled");
+        newerButton.onclick = function () {
+          let outerDiv = document.createElement("div");
+          outerDiv.classList.add("blog-post");
+          let postTitle = document.createElement("h2");
+          postTitle.classList.add("blog-post-title");
+          postTitle.innerText = "NEW TITLE!!!!";
+          outerDiv.appendChild(postTitle);
+          document.querySelector("main .row div").appendChild(outerDiv);
+        };
+      }
+
       // EX19) Write a function and attach it to the "Older" button, to remove the last Blog Post
+
+      function removeLastPost() {
+        let olderButton = document.querySelector(
+          ".blog-pagination a:nth-of-type(1)"
+        );
+        olderButton.onclick = function () {
+          let postToRemove = document.querySelector(".blog-post:last-of-type");
+          postToRemove.remove();
+        };
+      }
+
       // EX20) Write an alert with the name of the author every time the user hover with the mouse over an author name
 
-      function authorHover() {
-        let names = document.querySelectorAll(".blog-post-meta + a[href]");
+      function displayAuthorName() {
+        let names = document.querySelectorAll(".blog-post-meta a");
+        for (let i = 0; i < names.length; i++) {
+          names[i].onmouseover = function () {
+            alert(names[i].innerText);
+          };
+        }
       }
     </script>
   </body>
